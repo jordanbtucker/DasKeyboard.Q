@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DasKeyboard.Q", "DasKeyboard.Q\DasKeyboard.Q.csproj", "{53FFB28F-0E65-44F9-93CA-642B1E2C9AED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53FFB28F-0E65-44F9-93CA-642B1E2C9AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53FFB28F-0E65-44F9-93CA-642B1E2C9AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53FFB28F-0E65-44F9-93CA-642B1E2C9AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53FFB28F-0E65-44F9-93CA-642B1E2C9AED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A35B4CEA-B607-43A1-8953-0E8905391511}
+	EndGlobalSection
+EndGlobal
