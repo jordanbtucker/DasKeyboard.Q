@@ -14,7 +14,7 @@ namespace DasKeyboard.Q
     {
         private HttpClient httpClient = new HttpClient();
 
-        private AuthorizationInfo authorizationInfo;
+        public AuthorizationInfo AuthorizationInfo { get; set; }
 
         public const string CloudAuthenticationEndPoint = "https://q.daskeyboard.com/oauth/1.4/token";
 
@@ -48,7 +48,7 @@ namespace DasKeyboard.Q
                 return;
             }
 
-            if (this.authorizationInfo == null || this.authorizationInfo.AccessToken == null)
+            if (this.AuthorizationInfo == null || this.AuthorizationInfo.AccessToken == null)
             {
                 object credentials = null;
 
@@ -78,10 +78,10 @@ namespace DasKeyboard.Q
                 var response = await this.httpClient.PostAsync(this.AuthenticationEndPoint, content);
 
                 var responseSerializer = new DataContractJsonSerializer(typeof(AuthorizationInfo));
-                this.authorizationInfo = responseSerializer.ReadObject(await response.Content.ReadAsStreamAsync()) as AuthorizationInfo;
+                this.AuthorizationInfo = responseSerializer.ReadObject(await response.Content.ReadAsStreamAsync()) as AuthorizationInfo;
             }
 
-            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.authorizationInfo.AccessToken);
+            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.AuthorizationInfo.AccessToken);
         }
 
         private async Task<T> Get<T>(string resource) where T : class
