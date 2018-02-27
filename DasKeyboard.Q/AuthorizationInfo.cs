@@ -12,5 +12,17 @@ namespace DasKeyboard.Q
 
         [DataMember(Name = "user_id")]
         public int? UserId { get; set; }
+
+        public void Update(AuthorizationInfo authorizationInfo)
+        {
+            if (authorizationInfo.AccessToken != null)
+                this.AccessToken = authorizationInfo.AccessToken;
+
+            if (authorizationInfo.RefreshToken != null)
+                this.RefreshToken = authorizationInfo.RefreshToken;
+
+            if (authorizationInfo.UserId.HasValue)
+                this.UserId = authorizationInfo.UserId;
+        }
     }
 }
