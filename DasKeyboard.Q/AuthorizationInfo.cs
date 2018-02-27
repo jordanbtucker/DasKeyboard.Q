@@ -11,6 +11,6 @@ namespace DasKeyboard.Q
         public string RefreshToken { get; set; }
 
         [DataMember(Name = "user_id")]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 }
