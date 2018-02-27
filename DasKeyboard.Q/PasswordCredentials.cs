@@ -9,5 +9,8 @@ namespace DasKeyboard.Q
 
         [DataMember(Name = "password")]
         public string Password { get; set; }
+
+        [DataMember(Name = "grant_type")]
+        public string GrantType = "password";
     }
 }

@@ -9,5 +9,8 @@ namespace DasKeyboard.Q
 
         [DataMember(Name = "code")]
         public string Code { get; set; }
+
+        [DataMember(Name = "grant_type")]
+        public string GrantType = "code";
     }
 }

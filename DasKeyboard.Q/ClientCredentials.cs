@@ -9,5 +9,8 @@ namespace DasKeyboard.Q
 
         [DataMember(Name = "client_secret")]
         public string ClientSecret { get; set; }
+
+        [DataMember(Name = "grant_type")]
+        public string GrantType = "client_credentials";
     }
 }
