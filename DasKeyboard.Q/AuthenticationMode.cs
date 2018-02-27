@@ -6,5 +6,6 @@
         ClientCredentials,
         Password,
         AuthorizationCode,
+        RefreshToken,
     }
 }

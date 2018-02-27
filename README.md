@@ -30,6 +30,18 @@ var client = new Client
 };
 ```
 
+### Create a client that uses a refresh token
+
+```c#
+var client = new Client
+{
+    AuthenticationMode = AuthenticationMode.RefreshToken,
+    Credentials = new NetworkCredential(
+        "FQg6sYYcTyWTk2YK3qlBWy8k",          // client_id
+        "e45aab00c7b5f68761147d9b6118d4e6"), // refresh_token
+};
+```
+
 ### Create a client that accesses the local API
 
 ```c#

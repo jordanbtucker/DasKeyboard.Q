@@ -14,7 +14,11 @@ namespace DasKeyboard.Q
     {
         private HttpClient httpClient = new HttpClient();
 
-        public AuthorizationInfo AuthorizationInfo { get; set; }
+        private DateTime lastRefreshTime;
+
+        public AuthorizationInfo AuthorizationInfo { get; private set; } = new AuthorizationInfo();
+
+        public TimeSpan? RefreshInterval { get; set; } = new TimeSpan(1, 0, 0);
 
         public const string CloudAuthenticationEndPoint = "https://q.daskeyboard.com/oauth/1.4/token";
 
@@ -48,7 +52,25 @@ namespace DasKeyboard.Q
                 return;
             }
 
-            if (this.AuthorizationInfo == null || this.AuthorizationInfo.AccessToken == null)
+            if(this.AuthorizationInfo.RefreshToken != null && this.RefreshInterval.HasValue && DateTime.Now > this.lastRefreshTime.Add(this.RefreshInterval.Value))
+            {
+                var credentials = new RefreshTokenCredentials { ClientId = this.Credentials.UserName, RefreshToken = this.AuthorizationInfo.RefreshToken };
+                var requestSerializer = new DataContractJsonSerializer(credentials.GetType());
+                var requestStream = new MemoryStream();
+
+                requestSerializer.WriteObject(requestStream, credentials);
+
+                var content = new StreamContent(requestStream);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                var response = await this.httpClient.PostAsync(this.AuthenticationEndPoint, content);
+
+                var responseSerializer = new DataContractJsonSerializer(typeof(AuthorizationInfo));
+                var authorizationInfo = responseSerializer.ReadObject(await response.Content.ReadAsStreamAsync()) as AuthorizationInfo;
+                this.AuthorizationInfo.Update(authorizationInfo);
+                this.lastRefreshTime = DateTime.Now;
+            }
+            else if (this.AuthorizationInfo == null || this.AuthorizationInfo.AccessToken == null)
             {
                 object credentials = null;
 
@@ -65,6 +87,10 @@ namespace DasKeyboard.Q
                     case AuthenticationMode.AuthorizationCode:
                         credentials = new AuthorizationCodeCredentials { ClientId = this.Credentials.UserName, Code = this.Credentials.Password };
                         break;
+
+                    case AuthenticationMode.RefreshToken:
+                        credentials = new RefreshTokenCredentials { ClientId = this.Credentials.UserName, RefreshToken = this.Credentials.Password };
+                        break;
                 }
 
                 var requestSerializer = new DataContractJsonSerializer(credentials.GetType());
@@ -78,7 +104,9 @@ namespace DasKeyboard.Q
                 var response = await this.httpClient.PostAsync(this.AuthenticationEndPoint, content);
 
                 var responseSerializer = new DataContractJsonSerializer(typeof(AuthorizationInfo));
-                this.AuthorizationInfo = responseSerializer.ReadObject(await response.Content.ReadAsStreamAsync()) as AuthorizationInfo;
+                var authorizationInfo = responseSerializer.ReadObject(await response.Content.ReadAsStreamAsync()) as AuthorizationInfo;
+                this.AuthorizationInfo.Update(authorizationInfo);
+                this.lastRefreshTime = DateTime.Now;
             }
 
             this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.AuthorizationInfo.AccessToken);
