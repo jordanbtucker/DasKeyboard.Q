@@ -182,7 +182,12 @@ namespace DasKeyboard.Q
 
         public Task DeleteSignal(Signal signal)
         {
-            return this.Delete($"signals/{signal.Id}");
+            return this.DeleteSignal(signal.Id.Value);
+        }
+
+        public Task DeleteSignal(int id)
+        {
+            return this.Delete($"signals/{id}");
         }
     }
 }
