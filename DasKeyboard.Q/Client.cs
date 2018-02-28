@@ -95,6 +95,7 @@ namespace DasKeyboard.Q
                 var requestStream = new MemoryStream();
 
                 requestSerializer.WriteObject(requestStream, credentials);
+                requestStream.Position = 0;
 
                 var content = new StreamContent(requestStream);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -124,6 +125,7 @@ namespace DasKeyboard.Q
             var serializer = new DataContractJsonSerializer(data.GetType());
             var stream = new MemoryStream();
             serializer.WriteObject(stream, data);
+            stream.Position = 0;
             var content = new StreamContent(stream);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             await this.httpClient.PostAsync(this.ResolveApiUri(resource), content);
@@ -135,6 +137,7 @@ namespace DasKeyboard.Q
             var requestSerializer = new DataContractJsonSerializer(data.GetType());
             var requestStream = new MemoryStream();
             requestSerializer.WriteObject(requestStream, data);
+            requestStream.Position = 0;
             var content = new StreamContent(requestStream);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
@@ -149,6 +152,7 @@ namespace DasKeyboard.Q
             var requestSerializer = new DataContractJsonSerializer(data.GetType());
             var requestStream = new MemoryStream();
             requestSerializer.WriteObject(requestStream, data);
+            requestStream.Position = 0;
             var content = new StreamContent(requestStream);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), this.ResolveApiUri(resource)) { Content = content };
