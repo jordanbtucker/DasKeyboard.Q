@@ -12,6 +12,6 @@ namespace DasKeyboard.Q
         public string Code { get; set; }
 
         [DataMember(Name = "grant_type")]
-        public string GrantType = "code";
+        public string GrantType = "authorization_code";
     }
 }
