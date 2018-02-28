@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace DasKeyboard.Q
 {
+    [DataContract]
     public class Device
     {
         [DataMember(Name = "id")]

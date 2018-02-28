@@ -2,6 +2,7 @@
 
 namespace DasKeyboard.Q
 {
+    [DataContract]
     class PasswordCredentials
     {
         [DataMember(Name = "email")]

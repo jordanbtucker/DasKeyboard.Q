@@ -2,6 +2,7 @@
 
 namespace DasKeyboard.Q
 {
+    [DataContract]
     class ClientCredentials
     {
         [DataMember(Name = "client_id")]

@@ -2,6 +2,7 @@
 
 namespace DasKeyboard.Q
 {
+    [DataContract]
     public class AuthorizationInfo
     {
         [DataMember(Name = "access_token")]

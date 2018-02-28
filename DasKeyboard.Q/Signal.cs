@@ -2,6 +2,7 @@
 
 namespace DasKeyboard.Q
 {
+    [DataContract]
     public class Signal
     {
         [DataMember(Name = "id")]

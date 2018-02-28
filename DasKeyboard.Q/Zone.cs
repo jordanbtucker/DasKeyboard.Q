@@ -2,6 +2,7 @@
 
 namespace DasKeyboard.Q
 {
+    [DataContract]
     public class Zone
     {
         [DataMember(Name = "id")]

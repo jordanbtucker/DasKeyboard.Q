@@ -2,6 +2,7 @@
 
 namespace DasKeyboard.Q
 {
+    [DataContract]
     class AuthorizationCodeCredentials
     {
         [DataMember(Name = "client_id")]
