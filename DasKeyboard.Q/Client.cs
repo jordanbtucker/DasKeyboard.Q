@@ -18,8 +18,6 @@ namespace DasKeyboard.Q
 
         public AuthorizationInfo AuthorizationInfo { get; private set; } = new AuthorizationInfo();
 
-        public TimeSpan? RefreshInterval { get; set; } = new TimeSpan(1, 0, 0);
-
         public const string CloudAuthenticationEndPoint = "https://q.daskeyboard.com/oauth/1.4/token";
 
         public const string CloudEndPoint = "https://q.daskeyboard.com/api/1.0/";
@@ -52,7 +50,7 @@ namespace DasKeyboard.Q
                 return;
             }
 
-            if(this.AuthorizationInfo.RefreshToken != null && this.RefreshInterval.HasValue && DateTime.Now > this.lastRefreshTime.Add(this.RefreshInterval.Value))
+            if (this.AuthorizationInfo.RefreshToken != null && this.AuthorizationInfo.ExpiresIn.HasValue && DateTime.Now > this.lastRefreshTime.AddSeconds(this.AuthorizationInfo.ExpiresIn.Value))
             {
                 var credentials = new RefreshTokenCredentials { ClientId = this.Credentials.UserName, RefreshToken = this.AuthorizationInfo.RefreshToken };
                 var requestSerializer = new DataContractJsonSerializer(credentials.GetType());

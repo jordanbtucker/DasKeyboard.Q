@@ -14,6 +14,9 @@ namespace DasKeyboard.Q
         [DataMember(Name = "user_id")]
         public int? UserId { get; set; }
 
+        [DataMember(Name = "expires_in")]
+        public int? ExpiresIn { get; set; }
+
         public void Update(AuthorizationInfo authorizationInfo)
         {
             if (authorizationInfo.AccessToken != null)
