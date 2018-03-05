@@ -1,4 +1,4 @@
-﻿namespace DasKeyboard.Q
+namespace DasKeyboard.Q
 {
     public enum AuthenticationMode
     {
