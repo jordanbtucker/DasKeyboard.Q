@@ -3,8 +3,8 @@ DasKeyboard.Q
 
 A .NET Core library for accessing the [Das Keyboard Q REST API][1].
 
-**WARNING:** This is a work-in-progress. The code is only theoretical, meaning
-it hasn't been tested. Use at your own risk.
+**WARNING:** This is a work-in-progress, and the Das Keyboard team is still
+making changes to the Q REST API. Use at your own risk.
 
 ## Usage
 
